@@ -2,43 +2,43 @@ package com.backretotodo.retotodo.dto;
 
 public class TaskCategoryDTO {
 
-    private int taskId;
-    private String taskName;
-    private boolean taskCompleted;
+    private int id;
+    private String name;
+    private boolean completed;
     private Integer categoryId;
 
     public TaskCategoryDTO() {
     }
 
-    public TaskCategoryDTO(int taskId, String taskName, boolean taskCompleted, Integer categoryId) {
-        this.taskId = taskId;
-        this.taskName = taskName;
-        this.taskCompleted = taskCompleted;
+    public TaskCategoryDTO(int id, String name, boolean completed, Integer categoryId) {
+        this.id = id;
+        this.name = name;
+        this.completed = completed;
         this.categoryId = categoryId;
     }
 
-    public int getTaskId() {
-        return taskId;
+    public int getId() {
+        return id;
     }
 
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTaskName() {
-        return taskName;
+    public String getName() {
+        return name;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public boolean isTaskCompleted() {
-        return taskCompleted;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setTaskCompleted(boolean taskCompleted) {
-        this.taskCompleted = taskCompleted;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public Integer getCategoryId() {

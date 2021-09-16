@@ -66,34 +66,39 @@ public class ControllerTask {
     }
 
     @PostMapping(value = "/saveTask")
-    public Task saveTask(@RequestBody TaskCategoryDTO taskdto){
+    public TaskCategoryDTO saveTask(@RequestBody TaskCategoryDTO taskdto){
         Task task = new Task();
-        task.setName(taskdto.getTaskName());
-        task.setCompleted(taskdto.isTaskCompleted());
+        task.setName(taskdto.getName());
+        task.setCompleted(taskdto.isCompleted());
 
         Optional<TaskCategory> taskCategoryOptional = Optional.of(servicioCategory.listById(taskdto.getCategoryId()));
         if(taskCategoryOptional.isPresent()){
             task.setCategory(taskCategoryOptional.get());
         }
-        servicio.save(task);
-        return task;
+
+        return converToDto(servicio.save(task));
     }
 
     @PutMapping(value = "/updateTask")
-    public Task updateTask(@RequestBody TaskCategoryDTO taskdto){
-        Optional<Task> taskOptional = Optional.of(servicio.listById(taskdto.getTaskId()));
+    public TaskCategoryDTO updateTask(@RequestBody TaskCategoryDTO taskdto){
+        Optional<Task> taskOptional = Optional.of(servicio.listById(taskdto.getId()));
         Task task = null;
         if(taskOptional.isPresent()){
             task = taskOptional.get();
-            task.setName(taskdto.getTaskName());
-            task.setCompleted(taskdto.isTaskCompleted());
+            task.setName(taskdto.getName());
+            task.setCompleted(taskdto.isCompleted());
         }
-        return servicio.update(task);
+        return converToDto(servicio.update(task));
     }
 
     @DeleteMapping("deleteTask/{id}")
     public void deleteTask(@PathVariable("id") int id){
         servicio.deleteById(id);
+    }
+
+    private TaskCategoryDTO converToDto(Task task){
+        TaskCategoryDTO taskCategoryDTO = new TaskCategoryDTO(task.getId(), task.getName(), task.isCompleted(), task.getCategory().getId());
+        return taskCategoryDTO;
     }
 
 }
