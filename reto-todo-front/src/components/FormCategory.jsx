@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react'
 import Store from "../store/Store"
 
-const Form = (props) => {
+const FormCategory = (props) => {
 
     const formRef = useRef(null);
   
@@ -17,12 +17,11 @@ const Form = (props) => {
   
       const request = {
         name: state.name,
-        id: null,
-        isCompleted: false
+        id: null
       };
   
   
-      fetch(props.HOST_API + "/todo", {
+      fetch(props.HOST_API + "/saveTaskCategory", {
         method: "POST",
         body: JSON.stringify(request),
         headers: {
@@ -31,51 +30,24 @@ const Form = (props) => {
       })
         .then(response => response.json())
         .then((todo) => {
-          dispatch({ type: "add-item", item: todo });
+          dispatch({ type: "add-category", item: todo });
           setState({ name: "" });
           formRef.current.reset();
         });
     }
-  
-    const onEdit = (event) => {
-      event.preventDefault();
-  
-      const request = {
-        name: state.name,
-        id: item.id,
-        isCompleted: item.isCompleted
-      };
-  
-  
-      fetch(props.HOST_API + "/todo", {
-        method: "PUT",
-        body: JSON.stringify(request),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => response.json())
-        .then((todo) => {
-          dispatch({ type: "update-item", item: todo });
-          setState({ name: "" });
-          formRef.current.reset();
-        });
-    }
-  
   
   
     return <form ref={formRef}>
       <input
         type="text"
         name="name"
-        placeholder="¿Qué piensas hacer hoy?"
+        placeholder="Ingrese una categoria de tareas"
         onChange={(event) => {
           setState({ ...state, name: event.target.value })
         }}  ></input>
-        {item.id && <button onClick={onEdit}>Actualizar</button>}
-        {!item.id && <button onClick={onAdd}>Agregar</button>}
-      
+        <button onClick={onAdd}>Agregar</button>
+        <br/><br/><br/>
     </form>
   }
 
-  export default Form;
+  export default FormCategory;

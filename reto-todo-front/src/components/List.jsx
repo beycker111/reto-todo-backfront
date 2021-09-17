@@ -4,14 +4,16 @@ import Store from "../store/Store"
 const List = (props) => {
 
     const { dispatch, state } = useContext(Store);
-  
+    
+    /*
     useEffect(() => {
-      fetch(props.HOST_API + "/todos")
+      fetch(props.HOST_API + "/listTasks")
         .then(response => response.json())
         .then((list) => {
           dispatch({ type: "update-list", list })
         })
     }, [state.list.lenght, dispatch]);
+    */
   
     const onDelete = (id) => {
       fetch(props.HOST_API + "/" + id + "/todo", {
@@ -32,16 +34,18 @@ const List = (props) => {
             <td>ID</td>
             <td>Nombre</td>
             <td>¿Completado?</td>
+            <td>Eliminar</td>
+            <td>Editar</td>
           </tr>
         </thead>
         <tbody>
-          {state.list.map((todo) => {
-            return <tr key={todo.id}>
-              <td>{todo.id}</td>
-              <td>{todo.name}</td>
-              <td>{todo.isCompleted === true ? "SI" : "NO"}</td>
-              <td><button onClick={() => onDelete(todo.id)}>Eliminar</button></td>
-              <td><button onClick={() => onEdit(todo)}>Editar</button></td>
+          {state.list.find((todo) => todo.id == props.catid).tasks.map((itemtodo, index) => {
+            return<tr key={index}>
+                <td>{itemtodo.id}</td>
+                <td>{itemtodo.name}</td>
+                <td>{itemtodo.completed === true ? "SI" : "NO"}</td>
+                <td><button onClick={() => onDelete(itemtodo.id)}>Eliminar</button></td>
+                <td><button onClick={() => onEdit(itemtodo)}>Editar</button></td>
             </tr>
           })}
         </tbody>
