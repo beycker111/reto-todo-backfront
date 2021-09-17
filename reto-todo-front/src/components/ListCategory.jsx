@@ -26,11 +26,11 @@ const ListCategory = (props) => {
     return <div>
         <div>
             {state.list.map((cat) => {
-                return <div style={{margin: 20}}>
+                return <div>
                     <p> <h3>{cat.name}</h3> <button onClick={() => onDelete(cat.id)}>Eliminar</button></p>
                     <Form catid={cat.id} HOST_API={props.HOST_API} />
                     <List catid={cat.id} HOST_API={props.HOST_API} />
-                    <br /><br />
+                    <hr/>
                 </div>
             })}
         </div>

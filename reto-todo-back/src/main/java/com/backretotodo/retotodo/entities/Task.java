@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Task {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotNull
     private String name;

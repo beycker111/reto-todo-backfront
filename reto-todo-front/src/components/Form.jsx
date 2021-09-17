@@ -18,11 +18,13 @@ const Form = (props) => {
       const request = {
         name: state.name,
         id: null,
-        isCompleted: false
+        completed: false,
+        categoryId: props.catid
       };
+      
+      console.log(request);
   
-  
-      fetch(props.HOST_API + "/todo", {
+      fetch(props.HOST_API + "/saveTask", {
         method: "POST",
         body: JSON.stringify(request),
         headers: {
@@ -31,7 +33,12 @@ const Form = (props) => {
       })
         .then(response => response.json())
         .then((todo) => {
-          dispatch({ type: "add-item", item: todo });
+          //dispatch({ type: "add-item", item: todo });
+          fetch(props.HOST_API + "/listTaskCategorys")
+          .then(response => response.json())
+          .then((list) => {
+            dispatch({ type: "update-list-category", list })
+          })
           setState({ name: "" });
           formRef.current.reset();
         });

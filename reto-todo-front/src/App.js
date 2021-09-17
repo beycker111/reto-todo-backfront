@@ -12,8 +12,10 @@ const HOST_API = "http://localhost:8080/api"
 function App() {
   return (
     <StoreProvider>
-      <FormCategory HOST_API={HOST_API} />
-      <ListCategory HOST_API={HOST_API} />
+      <div class="m-5">
+        <FormCategory HOST_API={HOST_API} />
+        <ListCategory HOST_API={HOST_API} />
+      </div>
     </StoreProvider>
   );
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class TaskCategory {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NotNull
     private String name;

@@ -5,21 +5,26 @@ const List = (props) => {
 
     const { dispatch, state } = useContext(Store);
     
-    /*
+    
     useEffect(() => {
-      fetch(props.HOST_API + "/listTasks")
-        .then(response => response.json())
-        .then((list) => {
-          dispatch({ type: "update-list", list })
-        })
+      fetch(props.HOST_API + "/listTaskCategorys")
+          .then(response => response.json())
+          .then((list) => {
+            dispatch({ type: "update-list-category", list })
+          })
     }, [state.list.lenght, dispatch]);
-    */
+    
   
+    //Aqu+i debemos devolver nuevamente la lista actualizada de categorias y remplazar
     const onDelete = (id) => {
-      fetch(props.HOST_API + "/" + id + "/todo", {
+      fetch(props.HOST_API + "/deleteTask/" + id, {
         method: "DELETE"
       }).then((list) => {
-        dispatch({ type: "delete-item", id })
+        fetch(props.HOST_API + "/listTaskCategorys")
+        .then(response => response.json())
+        .then((list) => {
+          dispatch({ type: "update-list-category", list })
+        })
       })
     };
   
