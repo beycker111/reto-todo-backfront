@@ -1,17 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Store from "../store/Store"
 
 const List = (props) => {
 
     const { dispatch, state } = useContext(Store);
     
-    
-    useEffect(() => {
+    const updateCategoryList = () => {
       fetch(props.HOST_API + "/listTaskCategorys")
-          .then(response => response.json())
-          .then((list) => {
-            dispatch({ type: "update-list-category", list })
-          })
+      .then(response => response.json())
+      .then((list) => {
+        dispatch({ type: "update-list-category", list })
+      })
+    }
+
+    useEffect(() => {
+      updateCategoryList();
     }, [state.list.lenght, dispatch]);
     
   
@@ -27,13 +30,43 @@ const List = (props) => {
         })
       })
     };
+
+    const onCheckboxChange = () =>{
+
+      //event.preventDefault();
+
+      const request = {
+        name: state.item.name,
+        id: state.item.id,
+        completed: state.item.completed,
+        categoryId: props.catid
+      };
+      
+      fetch(props.HOST_API + "/updateTask", {
+        method: "PUT",
+        body: JSON.stringify(request),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then((todo) => {
+          //dispatch({ type: "update-item", item: todo });
+          updateCategoryList();
+          state.item = {};
+        });
+        
+    }
   
     const onEdit = (todo) => {
+      todo.categoryId = props.catid;
+      state.nameedit = todo.name;
+      state.edit = true;
       dispatch({ type: "edit-item", item: todo })
     };
   
-    return <div>
-      <table >
+    return <div class="col-md-6">
+      <table class="mt-2 table">
         <thead>
           <tr>
             <td>ID</td>
@@ -45,12 +78,21 @@ const List = (props) => {
         </thead>
         <tbody>
           {state.list.find((todo) => todo.id == props.catid).tasks.map((itemtodo, index) => {
+            var campoDisabled = true;
             return<tr key={index}>
                 <td>{itemtodo.id}</td>
-                <td>{itemtodo.name}</td>
-                <td>{itemtodo.completed === true ? "SI" : "NO"}</td>
+                <td>{itemtodo.name} </td>
+                <td>{/*itemtodo.completed === true ? "SI" : "NO"*/}<input type="checkbox" checked={itemtodo.completed} onChange={(event) => {
+                console.log(itemtodo.completed);
+                itemtodo.completed = !itemtodo.completed
+                state.item = itemtodo;
+                onCheckboxChange();
+                //console.log(itemtodo.completed)
+        }}></input></td>
                 <td><button onClick={() => onDelete(itemtodo.id)}>Eliminar</button></td>
-                <td><button onClick={() => onEdit(itemtodo)}>Editar</button></td>
+                <td><button onClick={() => {
+                  onEdit(itemtodo);
+                }}>Editar</button></td>
             </tr>
           })}
         </tbody>

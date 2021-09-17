@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useState } from 'react'
 import Store from "../store/Store"
+import Edit from './Edit'
 
 const FormCategory = (props) => {
 
@@ -37,17 +38,22 @@ const FormCategory = (props) => {
     }
   
   
-    return <form ref={formRef}>
-      <input
-        type="text"
-        name="name"
-        placeholder="Ingrese una categoria de tareas"
-        onChange={(event) => {
-          setState({ ...state, name: event.target.value })
-        }}  ></input>
-        <button onClick={onAdd}>Agregar</button>
-        <br/><br/><br/>
-    </form>
+    return <div>
+      <form ref={formRef}>
+        <input
+          type="text"
+          name="namecategory"
+          placeholder="Ingrese una categoria de tareas"
+          onChange={(event) => {
+            setState({ ...state, name: event.target.value })
+          }}  ></input>
+          <button onClick={onAdd}>Agregar</button>
+          <br/><br/>
+      </form>
+      <Edit HOST_API={props.HOST_API}/>
+      <br/><br/>
+    </div>
+    
   }
 
   export default FormCategory;

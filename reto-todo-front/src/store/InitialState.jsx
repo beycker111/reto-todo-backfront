@@ -1,5 +1,5 @@
 const initialState = {
-    list: [], item: {}
+    list: [], item: {}, edit: false, nameedit: ''
 }
 
 export default initialState;

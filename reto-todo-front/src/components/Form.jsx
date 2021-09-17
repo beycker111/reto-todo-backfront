@@ -79,8 +79,7 @@ const Form = (props) => {
         onChange={(event) => {
           setState({ ...state, name: event.target.value })
         }}  ></input>
-        {item.id && <button onClick={onEdit}>Actualizar</button>}
-        {!item.id && <button onClick={onAdd}>Agregar</button>}
+        <button onClick={onAdd}>Agregar</button>
       
     </form>
   }
