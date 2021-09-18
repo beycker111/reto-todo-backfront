@@ -39,15 +39,15 @@ const FormCategory = (props) => {
   
   
     return <div>
-      <form ref={formRef}>
+      <form ref={formRef} onSubmit={onAdd}>
         <input
           type="text"
           name="namecategory"
-          placeholder="Ingrese una categoria de tareas"
+          placeholder="Ingrese una categoria"
           onChange={(event) => {
             setState({ ...state, name: event.target.value })
-          }}  ></input>
-          <button onClick={onAdd}>Agregar</button>
+          }} required />
+          <button>Agregar</button>
           <br/><br/>
       </form>
       <Edit HOST_API={props.HOST_API}/>

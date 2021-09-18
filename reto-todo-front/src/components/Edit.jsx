@@ -57,7 +57,7 @@ const Edit = (props) => {
   
   
   
-    return <form ref={formRef}>
+    return <form ref={formRef} onSubmit={onEdit}>
       <input
         type="text"
         name="nameedit"
@@ -66,8 +66,8 @@ const Edit = (props) => {
         onChange={(event) => {
           setState({ ...stated, nameedit: event.target.value })
           console.log(stated.nameedit)
-        }}  ></input>
-        <button onClick={onEdit}>Actualizar</button>
+        }} required />
+        <button>Actualizar</button>
       
     </form>
   }

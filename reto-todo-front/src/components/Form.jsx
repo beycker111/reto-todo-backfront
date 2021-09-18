@@ -71,15 +71,22 @@ const Form = (props) => {
   
   
   
-    return <form ref={formRef}>
-      <input
-        type="text"
-        name="name"
-        placeholder="¿Qué piensas hacer hoy?"
-        onChange={(event) => {
-          setState({ ...state, name: event.target.value })
-        }}  ></input>
-        <button onClick={onAdd}>Agregar</button>
+    return <form ref={formRef} onSubmit={onAdd} align="center" class="form-group">
+      <div className="row">
+        <div className="col-md-4"></div>
+        <div className="col-md-4">
+        <input
+          type="text"
+          class="form-control mb-2"
+          name="name"
+          placeholder="Agregar una nueva actividad"
+          onChange={(event) => {
+            setState({ ...state, name: event.target.value })
+          }} required />
+          <button class="btn btn-primary">Agregar</button>
+        </div>
+        <div className="col-md-4"></div>
+      </div>
       
     </form>
   }

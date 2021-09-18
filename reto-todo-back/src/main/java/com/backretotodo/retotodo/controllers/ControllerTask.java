@@ -8,6 +8,7 @@ import com.backretotodo.retotodo.services.InterfaceServiceTaskCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -83,13 +84,16 @@ public class ControllerTask {
 
     @PutMapping(value = "/updateTask")
     public TaskCategoryDTO updateTask(@RequestBody TaskCategoryDTO taskdto){
-        Optional<Task> taskOptional = Optional.of(servicio.listById(taskdto.getId()));
+
         Task task = null;
-        if(taskOptional.isPresent()){
-            task = taskOptional.get();
-            task.setName(taskdto.getName());
-            task.setCompleted(taskdto.isCompleted());
+        Optional<Task> taskOptional = Optional.of(servicio.listById(taskdto.getId()));
+        if (!taskOptional.isPresent()){
+            throw new RuntimeException("ID no válido para actualizar");
         }
+        task = taskOptional.get();
+        task.setName(taskdto.getName());
+        task.setCompleted(taskdto.isCompleted());
+
         return converToDto(servicio.update(task));
     }
 
