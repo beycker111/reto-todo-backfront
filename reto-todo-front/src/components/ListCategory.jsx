@@ -26,7 +26,7 @@ const ListCategory = (props) => {
     return <div>
         <div>
             {state.list.map((cat) => {
-                return <div class="border p-3 bg-light">
+                return <div class="border py-3 px-4 bg-categoria">
                     <div class="row border rounded bg-info p-1 mb-3">
                       <div class="col-md-9">
                         <span class="h4">{cat.name}</span>

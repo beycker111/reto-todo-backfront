@@ -12,7 +12,8 @@ const HOST_API = "http://localhost:8080/api"
 function App() {
   return (
     <StoreProvider>
-      <div class="m-5">
+      <div class="my-4 mx-5">
+        <h2 align="center" class="mb-4">Registro de tareas SOFKA U</h2>
         <FormCategory HOST_API={HOST_API} />
         <ListCategory HOST_API={HOST_API} />
       </div>

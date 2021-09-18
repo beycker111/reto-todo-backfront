@@ -69,7 +69,7 @@ const List = (props) => {
         <div className="row">
           <div className="col-md-3"></div>
           <div className="col-md-6">
-          <table class="mt-2 table">
+          <table class="mt-2 table border colortabla">
             <thead>
               <tr>
                 <td>ID</td>

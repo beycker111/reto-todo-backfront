@@ -58,16 +58,29 @@ const Edit = (props) => {
   
   
     return <form ref={formRef} onSubmit={onEdit}>
-      <input
-        type="text"
-        name="nameedit"
-        placeholder="Editar tarea"
-        defaultValue={item.name}
-        onChange={(event) => {
-          setState({ ...stated, nameedit: event.target.value })
-          console.log(stated.nameedit)
-        }} required />
-        <button>Actualizar</button>
+      <div className="row">
+        <div className="col-md-3"></div>
+        <div className="col-md-6">
+          <div class="input-group mb-3">
+            <input
+            type="text"
+            class="form-control"
+            name="nameedit"
+            placeholder="Editar tarea"
+            defaultValue={item.name}
+            onChange={(event) => {
+              setState({ ...stated, nameedit: event.target.value })
+              console.log(stated.nameedit)
+            }} required />
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" >Actualizar</button>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3"></div>
+      </div>
+      
+        
       
     </form>
   }

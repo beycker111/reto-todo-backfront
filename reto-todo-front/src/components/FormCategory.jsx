@@ -40,15 +40,27 @@ const FormCategory = (props) => {
   
     return <div>
       <form ref={formRef} onSubmit={onAdd}>
-        <input
-          type="text"
-          name="namecategory"
-          placeholder="Ingrese una categoria"
-          onChange={(event) => {
-            setState({ ...state, name: event.target.value })
-          }} required />
-          <button>Agregar</button>
-          <br/><br/>
+        <div className="row">
+          <div className="col-md-3"></div>
+          <div className="col-md-6">
+            <div class="input-group mb-3">
+              <input
+              type="text"
+              class="form-control" 
+              name="namecategory"
+              placeholder="Ingrese una categoria"
+              onChange={(event) => {
+                setState({ ...state, name: event.target.value })
+              }} required />
+            
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary">Agregar</button>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-3"></div>
+        </div>
+      
       </form>
       <Edit HOST_API={props.HOST_API}/>
       <br/><br/>
