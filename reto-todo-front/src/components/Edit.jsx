@@ -12,8 +12,6 @@ const Edit = (props) => {
     //const { dispatch } = useContext(Store); //Nos da un estado externo
     const [stated, setState] = useState({item}); //Nos da un estado interno //State Tiene un item vacio
 
-    
-    //console.log(state);
     useEffect(() => {
         fetch(props.HOST_API + "/listTaskCategorys")
           .then(response => response.json())
@@ -70,7 +68,6 @@ const Edit = (props) => {
             defaultValue={item.name}
             onChange={(event) => {
               setState({ ...stated, nameedit: event.target.value })
-              console.log(stated.nameedit)
             }} required />
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" >Actualizar</button>

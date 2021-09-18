@@ -86,11 +86,9 @@ const List = (props) => {
                     <td>{itemtodo.id}</td>
                     <td>{itemtodo.name} </td>
                     <td>{/*itemtodo.completed === true ? "SI" : "NO"*/}<input type="checkbox" checked={itemtodo.completed} onChange={(event) => {
-                    console.log(itemtodo.completed);
                     itemtodo.completed = !itemtodo.completed
                     state.item = itemtodo;
                     onCheckboxChange();
-                    //console.log(itemtodo.completed)
             }}></input></td>
                     <td><button onClick={() => onDelete(itemtodo.id)}>Eliminar</button></td>
                     <td><button onClick={() => {

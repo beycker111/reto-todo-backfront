@@ -21,8 +21,6 @@ const Form = (props) => {
         completed: false,
         categoryId: props.catid
       };
-      
-      console.log(request);
   
       fetch(props.HOST_API + "/saveTask", {
         method: "POST",
